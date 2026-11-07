@@ -29,8 +29,8 @@ Welcome to my GitHub profile.
 ### Contributing to
 
 <!-- CONTRIBUTIONS:START -->
-- **[Qwen Code](https://github.com/QwenLM/qwen-code)** [![GitHub stars](https://img.shields.io/github/stars/QwenLM/qwen-code?style=flat&color=gold)](https://github.com/QwenLM/qwen-code) - Keep long answers readable in bounded viewports; Keep uniquely named MCP tools when names collide; Release OAuth refresh locks only when owned.
-- **[REA](https://github.com/morluto/rea)** [![GitHub stars](https://img.shields.io/github/stars/morluto/rea?style=flat&color=gold)](https://github.com/morluto/rea) - Retain inventory limitations with the latest selection; Settle Windows ChangeTime before recording a baseline; Seal in-process Evidence before publishing.
+- **[Qwen Code](https://github.com/QwenLM/qwen-code)** [![GitHub stars](https://img.shields.io/github/stars/QwenLM/qwen-code?style=flat&color=gold)](https://github.com/QwenLM/qwen-code) - Name the active shell in the startup context; Keep uniquely named MCP tools when names collide; Release OAuth refresh locks only when owned.
+- **[REA](https://github.com/morluto/rea)** [![GitHub stars](https://img.shields.io/github/stars/morluto/rea?style=flat&color=gold)](https://github.com/morluto/rea) - Add a non-executing dry run to process capture; Retain inventory limitations with the latest selection; Settle Windows ChangeTime before recording a baseline.
 - **[Nature Skills](https://github.com/Yuan1z0825/nature-skills)** [![GitHub stars](https://img.shields.io/github/stars/Yuan1z0825/nature-skills?style=flat&color=gold)](https://github.com/Yuan1z0825/nature-skills) - Accept cairo_pdf devices in editable-text checks.
 <!-- CONTRIBUTIONS:END -->
 
