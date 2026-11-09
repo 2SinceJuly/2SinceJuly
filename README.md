@@ -29,10 +29,10 @@ Welcome to my GitHub profile.
 ### Contributing to
 
 <!-- CONTRIBUTIONS:START -->
-- **[Qwen Code](https://github.com/QwenLM/qwen-code)** [![GitHub stars](https://img.shields.io/github/stars/QwenLM/qwen-code?style=flat&color=gold)](https://github.com/QwenLM/qwen-code) - Name the active shell in the startup context; Reconcile release issues only on failure; Keep uniquely named MCP tools when names collide.
-- **[REA](https://github.com/morluto/rea)** [![GitHub stars](https://img.shields.io/github/stars/morluto/rea?style=flat&color=gold)](https://github.com/morluto/rea) - Add a non-executing dry run to process capture; Retain inventory limitations with the latest selection; Settle Windows ChangeTime before recording a baseline.
-- **[OpenJudge](https://github.com/agentscope-ai/OpenJudge)** [![GitHub stars](https://img.shields.io/github/stars/agentscope-ai/OpenJudge?style=flat&color=gold)](https://github.com/agentscope-ai/OpenJudge) - Stop JsonMatchGrader matching a missing key against null.
-- **[Nature Skills](https://github.com/Yuan1z0825/nature-skills)** [![GitHub stars](https://img.shields.io/github/stars/Yuan1z0825/nature-skills?style=flat&color=gold)](https://github.com/Yuan1z0825/nature-skills) - Accept cairo_pdf devices in editable-text checks.
+- **[Qwen Code](https://github.com/QwenLM/qwen-code)** [![GitHub stars](https://img.shields.io/github/stars/QwenLM/qwen-code?style=flat&color=gold)](https://github.com/QwenLM/qwen-code) - name the active shell in the startup context; only file issues on failure and reconcile stale ones; drive the reconcile probe through the Broker's real rejection path.
+- **[REA](https://github.com/morluto/rea)** [![GitHub stars](https://img.shields.io/github/stars/morluto/rea?style=flat&color=gold)](https://github.com/morluto/rea) - add a non-executing dry run to capture_process_scenario; seal in-process Evidence before publishing; validate MCP registration before side effects.
+- **[Nature Skills](https://github.com/Yuan1z0825/nature-skills)** [![GitHub stars](https://img.shields.io/github/stars/Yuan1z0825/nature-skills?style=flat&color=gold)](https://github.com/Yuan1z0825/nature-skills) - accept ggsave(device = cairo_pdf) in editable-text check.
+- **[OpenJudge](https://github.com/agentscope-ai/OpenJudge)** [![GitHub stars](https://img.shields.io/github/stars/agentscope-ai/OpenJudge?style=flat&color=gold)](https://github.com/agentscope-ai/OpenJudge) - stop JsonMatchGrader matching a missing key against null.
 <!-- CONTRIBUTIONS:END -->
 
 ### Stack
