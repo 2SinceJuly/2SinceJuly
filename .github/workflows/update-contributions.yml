@@ -58,6 +58,7 @@ jobs:
               rea)        display="REA" ;;
               OpenJudge)  display="OpenJudge" ;;
               nature-skills) display="Nature Skills" ;;
+              deer-flow)  display="DeerFlow" ;;
               *)          display="$name" ;;
             esac
 
