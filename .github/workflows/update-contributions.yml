@@ -29,9 +29,17 @@ jobs:
                 count: length,
                 titles: ([.[].title] | unique)
               })
-            | sort_by(-.count)
             | .[] | [.repo, (.count|tostring), (.titles|join("\u0001"))] | @tsv' \
-            /tmp/merged.json > /tmp/repos.tsv
+            /tmp/merged.json > /tmp/grouped.tsv
+
+          # 按仓库 star 数排序
+          : > /tmp/repos.tsv
+          while IFS=$'\t' read -r repo count titles; do
+            [ -z "$repo" ] && continue
+            stars=$(gh api "repos/$repo" --jq '.stargazers_count' 2>/dev/null || echo 0)
+            printf -- '%s\t%s\t%s\t%s\n' "$stars" "$repo" "$count" "$titles" >> /tmp/repos.tsv
+          done < /tmp/grouped.tsv
+          sort -t$'\t' -k1,1nr -o /tmp/repos.tsv /tmp/repos.tsv
 
       - name: Render contribution list
         run: |
@@ -39,7 +47,7 @@ jobs:
           OUT=/tmp/contributions.md
           : > "$OUT"
 
-          while IFS=$'\t' read -r repo count titles; do
+          while IFS=$'\t' read -r stars repo count titles; do
             [ -z "$repo" ] && continue
             # 跳过 profile 仓库本身
             [ "$repo" = "${OWNER}/${OWNER}" ] && continue
