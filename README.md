@@ -29,8 +29,9 @@ Welcome to my GitHub profile.
 ### Contributing to
 
 <!-- CONTRIBUTIONS:START -->
-- **[Qwen Code](https://github.com/QwenLM/qwen-code)** [![GitHub stars](https://img.shields.io/github/stars/QwenLM/qwen-code?style=flat&color=gold)](https://github.com/QwenLM/qwen-code) - Name the active shell in the startup context; Keep uniquely named MCP tools when names collide; Release OAuth refresh locks only when owned.
+- **[Qwen Code](https://github.com/QwenLM/qwen-code)** [![GitHub stars](https://img.shields.io/github/stars/QwenLM/qwen-code?style=flat&color=gold)](https://github.com/QwenLM/qwen-code) - Name the active shell in the startup context; Reconcile release issues only on failure; Keep uniquely named MCP tools when names collide.
 - **[REA](https://github.com/morluto/rea)** [![GitHub stars](https://img.shields.io/github/stars/morluto/rea?style=flat&color=gold)](https://github.com/morluto/rea) - Add a non-executing dry run to process capture; Retain inventory limitations with the latest selection; Settle Windows ChangeTime before recording a baseline.
+- **[OpenJudge](https://github.com/agentscope-ai/OpenJudge)** [![GitHub stars](https://img.shields.io/github/stars/agentscope-ai/OpenJudge?style=flat&color=gold)](https://github.com/agentscope-ai/OpenJudge) - Stop JsonMatchGrader matching a missing key against null.
 - **[Nature Skills](https://github.com/Yuan1z0825/nature-skills)** [![GitHub stars](https://img.shields.io/github/stars/Yuan1z0825/nature-skills?style=flat&color=gold)](https://github.com/Yuan1z0825/nature-skills) - Accept cairo_pdf devices in editable-text checks.
 <!-- CONTRIBUTIONS:END -->
 
