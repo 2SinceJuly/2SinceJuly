@@ -31,15 +31,3 @@ Welcome to my GitHub profile.
   <img src="https://img.shields.io/badge/Shell-24292F?style=for-the-badge&logo=gnubash&logoColor=4EAA25" alt="Shell" />
   <img src="https://img.shields.io/badge/GitHub_Actions-24292F?style=for-the-badge&logo=githubactions&logoColor=2088FF" alt="GitHub Actions" />
 </p>
-
-<p align="center">
-  <a href="https://github.com/2SinceJuly?tab=repositories"><img src="https://img.shields.io/badge/repositories-24292F?style=for-the-badge&logo=github&logoColor=white" alt="repositories" /></a>
-  <a href="https://github.com/2SinceJuly?tab=stars"><img src="https://img.shields.io/badge/starred-24292F?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="starred" /></a>
-  <img src="https://komarev.com/ghpvc/?username=2SinceJuly&style=for-the-badge&color=24292F" alt="profile views" />
-</p>
-
-<div align="center">
-
-Currently poking around agent orchestration, AI content pipelines, and whatever I can break and rebuild
-
-</div>
