@@ -45,6 +45,8 @@ jobs:
         run: |
           OWNER="${GITHUB_REPOSITORY_OWNER}"
           OUT=/tmp/contributions.md
+          # Per-run URL stamp for the star badges; see the comment below.
+          stamp="$(date -u +%Y%m%d%H%M)"
           : > "$OUT"
 
           while IFS=$'\t' read -r stars repo count titles; do
@@ -96,10 +98,13 @@ jobs:
               | paste -sd ';' - \
               | sed 's/;/; /g')
 
-            # `cache=1m` keeps GitHub's camo proxy from holding a stale "invalid"
-            # response for a day after a shields.io hiccup.
-            printf -- '- **[%s](https://github.com/%s)** [![GitHub stars](https://img.shields.io/github/stars/%s?style=flat&color=gold&cache=1m)](https://github.com/%s) - %s.\n' \
-              "$display" "$repo" "$repo" "$repo" "$highlights" >> "$OUT"
+            # `cache=1m` tells shields.io how long its own edge may hold a value.
+            # GitHub's camo proxy caches per full URL and can keep an "invalid"
+            # response for a day, so `stamp` changes the URL every run and makes
+            # the next request miss that stale entry.
+            printf -- '- **[%s](https://github.com/%s)** [![GitHub stars](https://img.shields.io/github/stars/%s?style=flat&color=gold&cache=1m&stamp=%s)](https://github.com/%s) - %s.\n' \
+              "$display" "$repo" "$repo" "$stamp" "$repo" "$highlights" >> "$OUT"
+
           done < /tmp/repos.tsv
 
           echo "generated:"
