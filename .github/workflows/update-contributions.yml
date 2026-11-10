@@ -85,7 +85,9 @@ jobs:
               | paste -sd ';' - \
               | sed 's/;/; /g')
 
-            printf -- '- **[%s](https://github.com/%s)** [![GitHub stars](https://img.shields.io/github/stars/%s?style=flat&color=gold)](https://github.com/%s) - %s.\n' \
+            # `cache=1m` keeps GitHub's camo proxy from holding a stale "invalid"
+            # response for a day after a shields.io hiccup.
+            printf -- '- **[%s](https://github.com/%s)** [![GitHub stars](https://img.shields.io/github/stars/%s?style=flat&color=gold&cache=1m)](https://github.com/%s) - %s.\n' \
               "$display" "$repo" "$repo" "$repo" "$highlights" >> "$OUT"
           done < /tmp/repos.tsv
 
