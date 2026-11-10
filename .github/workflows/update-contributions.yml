@@ -81,6 +81,17 @@ jobs:
               | sed -E 's/^[a-z]+(\([^)]*\))?!?: //' \
               | sed -E 's/ \/btw / /g; s/`//g' \
               | awk '{ print tolower(substr($0,1,1)) substr($0,2) }' \
+              | awk '
+                  # Several PRs often repeat one change with a different count
+                  # ("add 15 … advisories", "add 33 … advisories"). Keep the first
+                  # mention of each distinct phrasing so the list stays informative.
+                  {
+                    key = $0
+                    gsub(/[0-9]+/, "#", key)
+                    if (key in seen) next
+                    seen[key] = 1
+                    print
+                  }' \
               | head -3 \
               | paste -sd ';' - \
               | sed 's/;/; /g')
