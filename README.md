@@ -1,15 +1,6 @@
-![Hi, I'm 2SinceJuly](./assets/banner.svg)
+![Hey, I'm 2SinceJuly](./assets/banner.svg)
 
 ---
-
-### Focus
-
-A university student learning to program.
-
-- Interested in AI development, especially agent workflows and tooling.
-- Working on improving my programming skills, contributing to open source, and learning new technologies.
-
-Welcome to my GitHub profile.
 
 ### Contributing to
 
@@ -33,3 +24,11 @@ Welcome to my GitHub profile.
   <img src="https://img.shields.io/badge/Shell-24292F?style=for-the-badge&logo=gnubash&logoColor=4EAA25" alt="Shell" />
   <img src="https://img.shields.io/badge/GitHub_Actions-24292F?style=for-the-badge&logo=githubactions&logoColor=2088FF" alt="GitHub Actions" />
 </p>
+
+---
+
+<div align="center">
+
+Currently exploring AI agents, developer tools, and open-source collaboration
+
+</div>
