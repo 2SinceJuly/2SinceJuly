@@ -13,18 +13,6 @@
 - **[OpenJudge](https://github.com/agentscope-ai/OpenJudge)** [![GitHub stars](https://img.shields.io/github/stars/agentscope-ai/OpenJudge?style=flat&color=gold&cache=1m&stamp=202611100224)](https://github.com/agentscope-ai/OpenJudge) - reject non-finite numbers in JsonValidatorGrader; stop JsonMatchGrader matching a missing key against null; align LLMGrader.from_config with BaseGrader.from_config.
 <!-- CONTRIBUTIONS:END -->
 
-### Stack
-
-<p>
-  <img src="https://img.shields.io/badge/Python-24292F?style=for-the-badge&logo=python&logoColor=3776AB" alt="Python" />
-  <img src="https://img.shields.io/badge/JavaScript-24292F?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/TypeScript-24292F?style=for-the-badge&logo=typescript&logoColor=3178C6" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/React-24292F?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/Node.js-24292F?style=for-the-badge&logo=nodedotjs&logoColor=5FA04E" alt="Node.js" />
-  <img src="https://img.shields.io/badge/Shell-24292F?style=for-the-badge&logo=gnubash&logoColor=4EAA25" alt="Shell" />
-  <img src="https://img.shields.io/badge/GitHub_Actions-24292F?style=for-the-badge&logo=githubactions&logoColor=2088FF" alt="GitHub Actions" />
-</p>
-
 ---
 
 <div align="center">
