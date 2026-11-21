@@ -15,122 +15,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Collect merged pull requests
+      - name: Refresh contribution table
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh api "search/issues?q=type:pr+author:${GITHUB_REPOSITORY_OWNER}+is:merged&per_page=100" \
-            > /tmp/merged.json
-
-          jq -r '.items
-            | group_by(.repository_url | split("/repos/")[1])
-            | map({
-                repo: (.[0].repository_url | split("/repos/")[1]),
-                count: length,
-                titles: ([.[].title] | unique)
-              })
-            | .[] | [.repo, (.count|tostring), (.titles|join("\u0001"))] | @tsv' \
-            /tmp/merged.json > /tmp/grouped.tsv
-
-          # 按仓库 star 数排序
-          : > /tmp/repos.tsv
-          while IFS=$'\t' read -r repo count titles; do
-            [ -z "$repo" ] && continue
-            stars=$(gh api "repos/$repo" --jq '.stargazers_count' 2>/dev/null || echo 0)
-            printf -- '%s\t%s\t%s\t%s\n' "$stars" "$repo" "$count" "$titles" >> /tmp/repos.tsv
-          done < /tmp/grouped.tsv
-          sort -t$'\t' -k1,1nr -o /tmp/repos.tsv /tmp/repos.tsv
-
-      - name: Render contribution list
-        run: |
-          OWNER="${GITHUB_REPOSITORY_OWNER}"
-          OUT=/tmp/contributions.md
-          # Per-run URL stamp for the star badges; see the comment below.
-          stamp="$(date -u +%Y%m%d%H%M)"
-          : > "$OUT"
-
-          while IFS=$'\t' read -r stars repo count titles; do
-            [ -z "$repo" ] && continue
-            # 跳过 profile 仓库本身
-            [ "$repo" = "${OWNER}/${OWNER}" ] && continue
-
-            name=$(echo "$repo" | cut -d/ -f2)
-            case "$name" in
-              qwen-code)  display="Qwen Code" ;;
-              rea)        display="REA" ;;
-              OpenJudge)  display="OpenJudge" ;;
-              nature-skills) display="Nature Skills" ;;
-              deer-flow)  display="DeerFlow" ;;
-              *)          display="$name" ;;
-            esac
-
-            # 每条 4-7 个词：优先 feat，其次 ci/test，最后 fix
-            highlights=$(echo "$titles" \
-              | tr '\001' '\n' \
-              | awk '
-                  {
-                    t = $0
-                    kind = t
-                    sub(/[(:!].*/, "", kind)
-                    pri = 9
-                    if (kind == "feat") pri = 0
-                    else if (kind == "ci" || kind == "test") pri = 1
-                    else if (kind == "fix") pri = 2
-                    print pri "\t" t
-                  }' \
-              | sort -s -k1,1n \
-              | cut -f2- \
-              | sed -E 's/^[a-z]+(\([^)]*\))?!?: //' \
-              | sed -E 's/ \/btw / /g; s/`//g' \
-              | awk '{ print tolower(substr($0,1,1)) substr($0,2) }' \
-              | awk '
-                  # Several PRs often repeat one change with a different count
-                  # ("add 15 … advisories", "add 33 … advisories"). Keep the first
-                  # mention of each distinct phrasing so the list stays informative.
-                  {
-                    key = $0
-                    gsub(/[0-9]+/, "#", key)
-                    if (key in seen) next
-                    seen[key] = 1
-                    print
-                  }' \
-              | head -3 \
-              | paste -sd ';' - \
-              | sed 's/;/; /g')
-
-            # `cache=1m` tells shields.io how long its own edge may hold a value.
-            # GitHub's camo proxy caches per full URL and can keep an "invalid"
-            # response for a day, so `stamp` changes the URL every run and makes
-            # the next request miss that stale entry.
-            printf -- '- **[%s](https://github.com/%s)** [![GitHub stars](https://img.shields.io/github/stars/%s?style=flat&color=gold&cache=1m&stamp=%s)](https://github.com/%s) - %s.\n' \
-              "$display" "$repo" "$repo" "$stamp" "$repo" "$highlights" >> "$OUT"
-
-          done < /tmp/repos.tsv
-
-          echo "generated:"
-          cat "$OUT"
-
-      - name: Update README
-        run: |
-          python3 - <<'PY'
-          import re, pathlib
-          readme = pathlib.Path("README.md")
-          text = readme.read_text()
-          block = pathlib.Path("/tmp/contributions.md").read_text().strip()
-
-          pattern = re.compile(
-              r"(<!-- CONTRIBUTIONS:START -->\n).*?(\n<!-- CONTRIBUTIONS:END -->)",
-              re.S)
-          if not pattern.search(text):
-              raise SystemExit("markers not found in README.md")
-
-          new = pattern.sub(lambda m: m.group(1) + block + m.group(2), text)
-          if new == text:
-              print("no change")
-          else:
-              readme.write_text(new)
-              print("updated")
-          PY
+          gh api graphql --paginate --slurp -F login="$GITHUB_REPOSITORY_OWNER" -f query='
+            query($login: String!, $endCursor: String) {
+              user(login: $login) {
+                pullRequests(first: 100, after: $endCursor, states: MERGED) {
+                  pageInfo { hasNextPage endCursor }
+                  nodes { number title repository { nameWithOwner isPrivate } }
+                }
+              }
+            }' > "$RUNNER_TEMP/merged.json"
+          python3 tools/contributions.py "$GITHUB_REPOSITORY_OWNER" < "$RUNNER_TEMP/merged.json"
 
       - name: Commit and push
         run: |
