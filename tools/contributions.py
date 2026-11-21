@@ -22,11 +22,11 @@ PROJECTS = {
 
 def render(pages, owner):
     projects = defaultdict(dict)
-    excluded = {f"{owner}/{owner}".lower(), "2sincejuly/skydot"}
+    profile_owner = owner.casefold()
     for page in pages:
         for pr in page["data"]["user"]["pullRequests"]["nodes"]:
             repo = pr["repository"]["nameWithOwner"]
-            if not pr["repository"]["isPrivate"] and repo.lower() not in excluded:
+            if not pr["repository"]["isPrivate"] and repo.split("/", 1)[0].casefold() != profile_owner:
                 projects[repo][pr["number"]] = pr["title"]
     if not projects:
         raise ValueError("No public contributions returned")
