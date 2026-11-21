@@ -21,13 +21,13 @@ GW, GH = W // PX, H // PX          # 300 x 150 cells
 WATER = 452
 WATER_CELL = WATER // PX
 
-INK = "#181818"
-PAPER = "#fcfcfc"
+INK = "#163656"
+PAPER = "#F1F6F8"
 
-C_FAR, C_FAR2 = "#eeeeee", "#e0e0e0"
-C_MID, C_MID2 = "#c4c4c4", "#b0b0b0"
-C_NEAR, C_NEAR2 = "#999999", "#737373"
-C_VILLAGE, C_ROOF = "#f8f8f8", "#2b2b2b"
+C_FAR, C_FAR2 = "#DEEAF1", "#CADEEA"
+C_MID, C_MID2 = "#A9C5D9", "#8FB1CA"
+C_NEAR, C_NEAR2 = "#7199B8", "#426E92"
+C_VILLAGE, C_ROOF = "#ECF3F6", "#1C4366"
 
 GLYPHS = {
     " ": ["....."] * 7,
@@ -127,10 +127,10 @@ def house(g, x, base_y, w, h, roof_h):
             g.box(gx, top - 2 - s * 2, 1, 2, C_ROOF)
     for wy in (top + 3, top + 3 + max(3, h // 3)):
         if wy + 2 < base_y - 4:
-            g.box(x + 1, wy, 1, 2, "#4a4a4a")
-            g.box(x + w - 2, wy, 1, 2, "#4a4a4a")
+            g.box(x + 1, wy, 1, 2, "#28577E")
+            g.box(x + w - 2, wy, 1, 2, "#28577E")
     dw = 2 if w >= 8 else 1
-    g.box(x + (w - dw) // 2, base_y - 4, dw, 4, "#4a4a4a")
+    g.box(x + (w - dw) // 2, base_y - 4, dw, 4, "#28577E")
 
 
 def village(g, x0, base_y):
@@ -147,7 +147,7 @@ def village(g, x0, base_y):
 
 def pine(g, x, base_y, tiers, color):
     """A soft conifer: narrowing bands, no hard ladder rungs."""
-    g.box(x, base_y - 2, 1, 2, "#4a4a4a")
+    g.box(x, base_y - 2, 1, 2, "#28577E")
     total = tiers + 2
     for i in range(total):
         half = max(0, int(round((total - i) * 0.34)))
@@ -160,12 +160,12 @@ def bridge(g, x, base_y, span):
     for i in range(span):
         t = i / max(1, span - 1)
         lift = int(round(2 * (1 - (2 * t - 1) ** 2)))
-        g.px(x + i, deck - lift, "#5c5c5c")
-        g.px(x + i, deck - lift + 1, "#4a4a4a")
+        g.px(x + i, deck - lift, "#336187")
+        g.px(x + i, deck - lift + 1, "#28577E")
     for frac in (0.34, 0.67):
         px = x + int(span * frac)
-        g.box(px, deck + 1, 1, 2, "#5c5c5c")
-    g.box(x, base_y - 1, span, 1, "#8a8a8a")
+        g.box(px, deck + 1, 1, 2, "#336187")
+    g.box(x, base_y - 1, span, 1, "#5E88A9")
 
 
 def title(g, text, x, y):
@@ -207,7 +207,7 @@ def scene():
         if trng.random() < 0.30:
             continue
         h = trng.randint(4, 10)
-        col = trng.choice(("#9c9c9c", "#8e8e8e", "#828282"))
+        col = trng.choice(("#759CBA", "#638DAD", "#557FA1"))
         for i in range(h):
             half = max(0, int(round((h - i) * 0.34))) if i > 1 else 0
             trees.box(x - half, base_t - i, half * 2 + 1, 1, col)
@@ -215,17 +215,17 @@ def scene():
     vill = Grid()
     base = WATER_CELL - 1
     end_x = village(vill, 74, base)
-    for x, t, c in ((28, 3, "#5c5c5c"), (35, 2, "#6f6f6f"),
-                    (end_x + 4, 3, "#5c5c5c"), (end_x + 11, 2, "#6f6f6f"),
-                    (end_x + 18, 3, "#5c5c5c"), (end_x + 26, 2, "#6f6f6f")):
+    for x, t, c in ((28, 3, "#336187"), (35, 2, "#3F6C90"),
+                    (end_x + 4, 3, "#336187"), (end_x + 11, 2, "#3F6C90"),
+                    (end_x + 18, 3, "#336187"), (end_x + 26, 2, "#3F6C90")):
         pine(vill, x, base, t, c)
     bridge(vill, 26, base, 34)
 
     water = Grid()
-    water.box(0, WATER_CELL, GW, GH - WATER_CELL, "#f0f0f0")
+    water.box(0, WATER_CELL, GW, GH - WATER_CELL, "#E1ECF2")
 
     shore = Grid()
-    shore.box(0, WATER_CELL - 1, GW, 1, "#8a8a8a")
+    shore.box(0, WATER_CELL - 1, GW, 1, "#5E88A9")
 
     return far, mid, near, trees, vill, water, shore
 
@@ -252,20 +252,20 @@ def birds():
         for r, line in enumerate(("#...#", ".#.#.", "..#..")):
             for c, ch in enumerate(line):
                 if ch == "#":
-                    g.px(ox + c, oy + r, "#444444")
+                    g.px(ox + c, oy + r, "#24547B")
     return g.rects()
 
 
 def boat():
     g = Grid()
-    g.box(243, 124, 5, 1, "#3c3c3c")
-    g.box(244, 123, 3, 1, "#3c3c3c")
-    g.box(247, 119, 1, 4, "#5c5c5c")
-    g.box(245, 121, 1, 2, "#5c5c5c")
+    g.box(243, 124, 5, 1, "#214F74")
+    g.box(244, 123, 3, 1, "#214F74")
+    g.box(247, 119, 1, 4, "#336187")
+    g.box(245, 121, 1, 2, "#336187")
     return g.rects()
 
 
-def ripples(seed, y0, y1, count, colors=("#e4e4e4", "#d8d8d8")):
+def ripples(seed, y0, y1, count, colors=("#D0E1EC", "#C0D7E5")):
     rng = random.Random(seed)
     g = Grid()
     for _ in range(count):
@@ -282,7 +282,7 @@ def build():
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="title desc">
 <title id="title">Hi, I'm 2SinceJuly</title>
-<desc id="desc">Animated monochrome pixel-art landscape of a Wannan village: layered mountain ridges, white-walled houses, pines and a stone bridge on still water, with drifting clouds, birds, a bobbing boat and rippling reflections.</desc>
+<desc id="desc">Animated blue-toned pixel-art landscape of a Wannan village: layered mountain ridges, white-walled houses, pines and a stone bridge on still water, with drifting clouds, birds, a bobbing boat and rippling reflections.</desc>
 <style>
 text{{font-family:'Courier New',Courier,monospace;fill:{INK}}}
 .cloud{{animation:cloud 24s ease-in-out infinite alternate}}
@@ -336,7 +336,7 @@ text{{font-family:'Courier New',Courier,monospace;fill:{INK}}}
 <text x="49" y="150" font-size="18">A student building AI agent workflows,</text>
 <text x="49" y="176" font-size="18">and contributing to open source.</text>
 
-<rect x="1090" y="44" width="60" height="64" fill="none" stroke="#333333"/>
+<rect x="1090" y="44" width="60" height="64" fill="none" stroke="#1F486D"/>
 <text x="1120" y="71" font-size="21" text-anchor="middle">山</text>
 <text x="1120" y="97" font-size="21" text-anchor="middle">水</text>
 <text x="48" y="581" font-size="10" letter-spacing="1">山水之间</text>

@@ -43,9 +43,9 @@ def render(pages, owner):
         rows.append(
             f'<tr><td><strong><a href="{url}">{escape(display)}</a></strong> '
             f'<a href="{url}/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/{repo}'
-            f'?style=flat-square&amp;label=%E2%98%85&amp;labelColor=383838&amp;color=646464"></a></td>'
+            f'?style=flat-square&amp;label=%E2%98%85&amp;labelColor=163656&amp;color=426E92"></a></td>'
             f'<td>{escape(org)}</td><td><a href="{url}/pulls?{search}"><img alt="{count} merged PRs" '
-            f'src="https://img.shields.io/badge/PRs-{count}-181818?style=flat-square&amp;labelColor=505050">'
+            f'src="https://img.shields.io/badge/PRs-{count}-24547B?style=flat-square&amp;labelColor=163656">'
             f'</a></td><td>{escape(focus)}</td></tr>'
         )
         highlights.append(f"<p><strong>{escape(org)} · {escape(display)}</strong></p>\n<ul>")
