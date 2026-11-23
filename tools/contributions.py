@@ -56,7 +56,7 @@ def render(pages, owner):
         highlights.append("</ul>")
     return "\n".join([
         "<table>", "<thead><tr><th>Project</th><th>Org</th><th>Merged</th><th>Focus</th></tr></thead>",
-        "<tbody>", *rows, "</tbody>", "</table>", "", "<details>", "<summary><strong>Highlights</strong></summary>",
+        "<tbody>", *rows, "</tbody>", "</table>", "", "<details open>", "<summary><strong>Highlights</strong></summary>",
         "", *highlights, "</details>",
     ])
 
