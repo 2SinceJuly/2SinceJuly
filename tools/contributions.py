@@ -10,12 +10,12 @@ from urllib.parse import urlencode
 
 # Display names, focus areas, and representative PRs shown on the profile.
 PROJECTS = {
-    "morluto/rea": ("REA", "morluto", "Mach-O analysis, provider diagnostics, V8 cached data", [9570, 9603, 9501]),
-    "QwenLM/qwen-code": ("Qwen Code", "QwenLM", "Loop controls, shell detection, release CI", [17048, 16491, 15852]),
-    "Tencent/AI-Infra-Guard": ("AI-Infra-Guard", "Tencent", "NVD advisories for AI products", [745]),
-    "agentscope-ai/OpenJudge": ("OpenJudge", "agentscope-ai", "JSON validation, grader configuration", [226, 218, 222]),
-    "bytedance/deer-flow": ("DeerFlow", "ByteDance", "Message parsing, agent memory, subagent state", [8066, 8146, 8167]),
-    "agentscope-ai/agentscope": ("agentscope", "agentscope-ai", "Knowledge retrieval, upload parsing, Gemini TTS", [3976, 3986, 4038]),
+    "morluto/rea": ("REA", "morluto", "Mach-O/IPS analysis, process sandbox, SQLite paging", [9570, 8469, 9331, 9108]),
+    "QwenLM/qwen-code": ("Qwen Code", "QwenLM", "MCP tool routing, telemetry, shell context", [15757, 16495, 16491]),
+    "Tencent/AI-Infra-Guard": ("AI-Infra-Guard", "Tencent", "NVD advisories for AI products", [742]),
+    "agentscope-ai/OpenJudge": ("OpenJudge", "agentscope-ai", "Evaluation prompts, grader validation", [224, 226, 218]),
+    "bytedance/deer-flow": ("DeerFlow", "ByteDance", "Thread lifecycle, agent memory, message parsing", [8036, 8146, 8066]),
+    "agentscope-ai/agentscope": ("agentscope", "agentscope-ai", "RAG upload routing, multi-tenant context", [3986, 3976]),
     "Yuan1z0825/nature-skills": ("Nature Skills", "Yuan1z0825", "Editable text in PDF figures", [284]),
 }
 
