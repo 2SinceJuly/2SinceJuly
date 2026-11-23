@@ -18,7 +18,7 @@
 </tbody>
 </table>
 
-<details>
+<details open>
 <summary><strong>Highlights</strong></summary>
 
 <p><strong>morluto · REA</strong></p>
