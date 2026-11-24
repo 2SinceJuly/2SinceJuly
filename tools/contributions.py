@@ -24,11 +24,13 @@ PROJECTS = {
 
 def render(pages, owner):
     projects = defaultdict(dict)
+    stars = {}
     profile_owner = owner.casefold()
     for page in pages:
         for pr in page["data"]["user"]["pullRequests"]["nodes"]:
             repo = pr["repository"]["nameWithOwner"]
             if not pr["repository"]["isPrivate"] and repo.split("/", 1)[0].casefold() != profile_owner:
+                stars[repo] = pr["repository"]["stargazerCount"]
                 projects[repo][pr["number"]] = pr["title"]
     if not projects:
         raise ValueError("No public contributions returned")
@@ -44,8 +46,7 @@ def render(pages, owner):
         search = urlencode({"q": f"is:pr is:merged author:{owner}"})
         rows.append(
             f'<tr><td><strong><a href="{url}">{escape(display)}</a></strong></td><td>'
-            f'<a href="{url}/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/{repo}'
-            f'?style=social&amp;label=Stars&amp;logo=undertale&amp;logoColor=FB6571"></a></td>'
+            f'<a href="{url}/stargazers"><kbd>♥ Stars</kbd> <kbd>{stars[repo]:,}</kbd></a></td>'
             f'<td>{escape(org)}</td><td><a href="{url}/pulls?{search}"><img alt="{count} merged PRs" '
             f'src="https://img.shields.io/badge/PRs-{count}-white?style=social&amp;logo=git&amp;logoColor=669477">'
             f'</a></td><td>{escape(focus)}</td></tr>'

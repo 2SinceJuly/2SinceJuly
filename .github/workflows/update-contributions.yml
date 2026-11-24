@@ -24,7 +24,7 @@ jobs:
               user(login: $login) {
                 pullRequests(first: 100, after: $endCursor, states: MERGED) {
                   pageInfo { hasNextPage endCursor }
-                  nodes { number title repository { nameWithOwner isPrivate } }
+                  nodes { number title repository { nameWithOwner isPrivate stargazerCount } }
                 }
               }
             }' > "$RUNNER_TEMP/merged.json"
