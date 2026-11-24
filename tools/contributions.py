@@ -23,13 +23,13 @@ PROJECTS = {
 
 
 def write_star_badge(repo, count):
-    value = f"{count:,}"
+    value = f"{count / 1000:.1f}K" if count >= 1000 else str(count)
     number_width = 10 + 7 * len(value)
     width = 59 + number_width
     path = Path("assets/stars") / f"{repo}.svg"
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="20" role="img" aria-label="{value} stars">
-  <title>{value} stars</title>
+    path.write_text(f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="20" role="img" aria-label="{count:,} stars">
+  <title>{count:,} stars</title>
   <defs>
     <linearGradient id="face" x2="0" y2="1" gradientUnits="objectBoundingBox">
       <stop stop-color="#fff"/><stop offset="1" stop-color="#f2f3f4"/>
