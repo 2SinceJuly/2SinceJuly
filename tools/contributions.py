@@ -17,6 +17,8 @@ PROJECTS = {
     "bytedance/deer-flow": ("DeerFlow", "ByteDance", "Thread lifecycle, agent memory, message parsing", [8036, 8146, 8066]),
     "agentscope-ai/agentscope": ("agentscope", "agentscope-ai", "RAG upload routing, multi-tenant context", [3986, 3976]),
     "Yuan1z0825/nature-skills": ("Nature Skills", "Yuan1z0825", "Editable text in PDF figures", [284]),
+    "pingdotgg/t3code": ("T3 Code", "pingdotgg", "Work-log image layout", [41597]),
+    "stablyai/orca": ("Orca", "stablyai", "Droid hooks, Claude plan labels, usage reporting", [47853, 47836, 47804]),
 }
 
 
@@ -41,11 +43,11 @@ def render(pages, owner):
         count = len(prs)
         search = urlencode({"q": f"is:pr is:merged author:{owner}"})
         rows.append(
-            f'<tr><td><strong><a href="{url}">{escape(display)}</a></strong> '
+            f'<tr><td><strong><a href="{url}">{escape(display)}</a></strong></td><td>'
             f'<a href="{url}/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/{repo}'
-            f'?style=flat-square&amp;label=%E2%98%85&amp;labelColor=163656&amp;color=426E92"></a></td>'
+            f'?style=social&amp;label=Stars&amp;logo=undertale&amp;logoColor=FB6571"></a></td>'
             f'<td>{escape(org)}</td><td><a href="{url}/pulls?{search}"><img alt="{count} merged PRs" '
-            f'src="https://img.shields.io/badge/PRs-{count}-24547B?style=flat-square&amp;labelColor=163656">'
+            f'src="https://img.shields.io/badge/PRs-{count}-white?style=social&amp;logo=git&amp;logoColor=669477">'
             f'</a></td><td>{escape(focus)}</td></tr>'
         )
         highlights.append(f"<p><strong>{escape(org)} · {escape(display)}</strong></p>\n<ul>")
@@ -55,8 +57,8 @@ def render(pages, owner):
             highlights.append(f'<li><a href="{url}/pull/{number}">{label}</a></li>')
         highlights.append("</ul>")
     return "\n".join([
-        "<table>", "<thead><tr><th>Project</th><th>Org</th><th>Merged</th><th>Focus</th></tr></thead>",
-        "<tbody>", *rows, "</tbody>", "</table>", "", "<details open>", "<summary><strong>Highlights</strong></summary>",
+        "<table>", "<thead><tr><th>Project</th><th>Stars</th><th>Org</th><th>Merged</th><th>Focus</th></tr></thead>",
+        "<tbody>", *rows, "</tbody>", "</table>", "", "<details>", "<summary><strong>Highlights</strong></summary>",
         "", *highlights, "</details>",
     ])
 
