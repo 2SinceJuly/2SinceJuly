@@ -22,6 +22,31 @@ PROJECTS = {
 }
 
 
+def write_star_badge(repo, count):
+    value = f"{count:,}"
+    number_width = 10 + 7 * len(value)
+    width = 59 + number_width
+    path = Path("assets/stars") / f"{repo}.svg"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="20" role="img" aria-label="{value} stars">
+  <title>{value} stars</title>
+  <defs>
+    <linearGradient id="face" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#fff"/><stop offset="1" stop-color="#f2f3f4"/>
+    </linearGradient>
+  </defs>
+  <rect x=".5" y=".5" width="54" height="19" rx="3" fill="url(#face)" stroke="#d0d3d6"/>
+  <rect x="59.5" y=".5" width="{number_width - 1}" height="19" rx="3" fill="#fafafa" stroke="#d0d3d6"/>
+  <path fill="#fb6571" transform="translate(4 4)" d="M1 1h4v1h2V1h4v1h1v5h-1v1h-1v1H9v1H8v1H7v1H5v-1H4v-1H3V9H2V8H1V7H0V2h1z"/>
+  <g font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#333">
+    <text x="21" y="14">Stars</text>
+    <text x="{59 + number_width / 2:g}" y="14" text-anchor="middle">{value}</text>
+  </g>
+</svg>
+''')
+    return path.as_posix()
+
+
 def render(pages, owner):
     projects = defaultdict(dict)
     stars = {}
@@ -44,9 +69,10 @@ def render(pages, owner):
         url = f"https://github.com/{repo}"
         count = len(prs)
         search = urlencode({"q": f"is:pr is:merged author:{owner}"})
+        star_badge = write_star_badge(repo, stars[repo])
         rows.append(
             f'<tr><td><strong><a href="{url}">{escape(display)}</a></strong></td><td>'
-            f'<a href="{url}/stargazers"><kbd>♥ Stars</kbd> <kbd>{stars[repo]:,}</kbd></a></td>'
+            f'<a href="{url}/stargazers"><img src="{star_badge}" alt="{stars[repo]:,} stars"></a></td>'
             f'<td>{escape(org)}</td><td><a href="{url}/pulls?{search}"><img alt="{count} merged PRs" '
             f'src="https://img.shields.io/badge/PRs-{count}-white?style=social&amp;logo=git&amp;logoColor=669477">'
             f'</a></td><td>{escape(focus)}</td></tr>'
